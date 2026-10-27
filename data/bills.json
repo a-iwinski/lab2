@@ -1,0 +1,14 @@
+{
+    "bill-1": {
+        "amount": 120.50,
+        "date_due": "2024-03-10",
+        "bill_type": "prąd",
+        "apartment": "apart-polanka"
+    },
+    "bill-2": {
+        "amount": 65.00,
+        "date_due": "2024-03-15",
+        "bill_type": "internet",
+        "apartment": "apart-polanka"
+    }
+}
