@@ -1,0 +1,12 @@
+{
+    "transfer-1": {
+        "timestamp": "2024-03-10 12:00:00",
+        "amount": 120.50,
+        "description": "zapłata za prąd"
+    },
+    "transfer-2": {
+        "timestamp": "2024-03-15 12:00:00",
+        "amount": 65.00,
+        "description": "zapłata za internet"
+    }
+}

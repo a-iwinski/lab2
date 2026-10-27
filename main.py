@@ -3,6 +3,18 @@ from typing import Dict
 
 import json
 
+class Transfers(BaseModel):
+    timestamp: str
+    amount: float
+    description: str
+    @staticmethod
+    def from_json_file(file_path: str) -> Dict[str,'Transfers']:
+        data = None
+        with open(file_path, 'r') as file:
+            data = json.load(file)
+        assert isinstance(data, dict), "Expected a dictionary of transfers"
+        return {key: Transfers(**transfer) for key, transfer in data.items()}
+    
 class Bill(BaseModel):
     amount: float
     date_due: str
@@ -65,6 +77,7 @@ class Manager:
     def __init__(self, parameters: Parameters):
         self.parameters = parameters 
 
+        self.transfers = {}
         self.apartments = {}
         self.tenants = {}
         self.bills = {}
@@ -74,6 +87,7 @@ class Manager:
         self.apartments = Apartment.from_json_file(self.parameters.apartments_json_path)
         self.tenants = Tenant.from_json_file(self.parameters.tenants_json_path)
         self.bills = Bill.from_json_file('data/bills.json')
+        self.transfers = Transfers.from_json_file('data/transfers.json')
 if __name__ == '__main__':
     parameters = Parameters()
     manager = Manager(parameters)
@@ -88,3 +102,6 @@ if __name__ == '__main__':
 
     for bill in manager.bills.values():
         print(bill.amount, bill.date_due, bill.bill_type, bill.apartment)
+
+    for transfer in manager.transfers.values():
+        print(transfer.timestamp, transfer.amount, transfer.description)
